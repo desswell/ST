@@ -1,0 +1,797 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Госуслуги",
+    "version": "0.0.1"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080/api/v1",
+      "description": "Dev server"
+    }
+  ],
+  "paths": {
+    "/applications": {
+      "get": {
+        "summary": "Метод получения списка заявок",
+        "tags": [
+          "Applications"
+        ],
+        "operationId": "GetAllApplications",
+        "responses": {
+          "200": {
+            "description": "Успешный ответ со списком заявок",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Applications"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Все нестандартное",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/services": {
+      "get": {
+        "summary": "Метод получения списка услуг",
+        "tags": [
+          "Services"
+        ],
+        "operationId": "GetAllServices",
+        "responses": {
+          "200": {
+            "description": "Успешный ответ со списком услуг",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Services"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Все нестандартное",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user": {
+      "get": {
+        "summary": "Метод входа",
+        "tags": [
+          "user"
+        ],
+        "operationId": "GetUser",
+        "responses": {
+          "200": {
+            "description": "Успешный ответ с пользователем",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Все нестандартное",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/reg": {
+      "post": {
+        "summary": "Метод регистрации",
+        "tags": [
+          "user"
+        ],
+        "operationId": "CreateUser",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Успешный ответ с созданным пользователем",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Все нестандартное",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/infouser/{id}": {
+      "get": {
+        "summary": "Информация о пользователе",
+        "tags": [
+          "user"
+        ],
+        "operationId": "GetUserInfo",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Идентификатор пользователя",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Успешный ответ с информацией о пользователе",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Все нестандартное",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notification/{id}": {
+      "get": {
+        "summary": "Метод получения уведомления",
+        "tags": [
+          "Notification"
+        ],
+        "operationId": "GetNotificationBydId",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Идентификатор уведомления",
+            "schema": {
+              "type": "integer"
+            },
+            "example": 3
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Успешный ответ с одним уведомлением",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Notifications"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Все нестандартное",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Метод удаления уведомления",
+        "tags": [
+          "Notification"
+        ],
+        "operationId": "DeleteNotificationBydId",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Идентификатор уведомления",
+            "schema": {
+              "type": "integer"
+            },
+            "example": 2
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Успешное удаление",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "default": {
+            "description": "Все нестандартное",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/application/{id}": {
+      "get": {
+        "summary": "Метод получения информации о заявке",
+        "tags": [
+          "Applications"
+        ],
+        "operationId": "GetApplicationsByIdApplication",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Идентификатор заявки",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Успешный ответ с одной заявкой",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Applications"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Все нестандартное",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Метод удаления заявки по идентификатору",
+        "tags": [
+          "Applications"
+        ],
+        "operationId": "DeleteApplicationsBydId",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Идентификатор заявки",
+            "schema": {
+              "type": "integer"
+            },
+            "example": 2
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Успешное удаление",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "default": {
+            "description": "Все нестандартное",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/services/{id}": {
+      "get": {
+        "summary": "Метод получения информации об услуге",
+        "tags": [
+          "Services"
+        ],
+        "operationId": "GetServicesByIdServices",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Идентификатор услуги",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Успешный ответ с одной услугой",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Services"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Все нестандартное",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Метод удаления услуги по идентификатору",
+        "tags": [
+          "Services"
+        ],
+        "operationId": "DeleteServicesBydId",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Идентификатор услуги",
+            "schema": {
+              "type": "integer"
+            },
+            "example": 2
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Успешное удаление",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "default": {
+            "description": "Все нестандартное",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/put/application": {
+      "put": {
+        "summary": "Метод обновления информации о заявке",
+        "tags": [
+          "Applications"
+        ],
+        "operationId": "UbdateApplicationFrom",
+        "requestBody": {
+          "description": "Обновление заявки",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Applications"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Успешный ответ с обновлением заявки",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Applications"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Все нестандартное",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/put/services": {
+      "put": {
+        "summary": "Метод обновления информации об услуге",
+        "tags": [
+          "Services"
+        ],
+        "operationId": "UbdateServicesFrom",
+        "requestBody": {
+          "description": "Обновление заявки",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Services"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Успешный ответ с обновлением услуги",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Services"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Все нестандартное",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/put/application_status": {
+      "put": {
+        "summary": "Метод обновления статуса информации о заявке",
+        "tags": [
+          "Applications"
+        ],
+        "operationId": "UbdateApplicationStatusFrom",
+        "requestBody": {
+          "description": "Обновление статуса заявки",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Applications"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Успешный ответ с обновлением счета",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Applications"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Все нестандартное",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/put/services_status": {
+      "put": {
+        "summary": "Метод обновления статуса информации о заявке",
+        "tags": [
+          "Services"
+        ],
+        "operationId": "UbdateServicesStatusFrom",
+        "requestBody": {
+          "description": "Обновление статуса услуги",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Services"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Успешный ответ с обновлением услуги",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Services"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Все нестандартное",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/application/{id_user}": {
+      "get": {
+        "summary": "Метод получения информации о заявках пользователя",
+        "tags": [
+          "Applications"
+        ],
+        "operationId": "GetApplicationByIdServices",
+        "parameters": [
+          {
+            "name": "id_user",
+            "in": "path",
+            "required": true,
+            "description": "Идентификатор пользователя",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Успешный ответ с заявками пользователя",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Applications"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Все нестандартное",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "required": [
+          "username",
+          "FIO"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": "1"
+          },
+          "id_application": {
+            "type": "integer",
+            "example": "1"
+          },
+          "username": {
+            "type": "string",
+            "example": "krasava"
+          },
+          "FIO": {
+            "type": "string",
+            "example": "Сергеев Сегрей Сергеевич"
+          },
+          "manager": {
+            "type": "boolean",
+            "example": 0
+          },
+          "passport": {
+            "type": "integer",
+            "example": "0316352475"
+          },
+          "SNILS": {
+            "type": "integer",
+            "example": "3583295393472"
+          },
+          "INN": {
+            "type": "integer",
+            "example": "62345234523"
+          }
+        }
+      },
+      "Notifications": {
+        "type": "object",
+        "required": [
+          "name",
+          "opisanie"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": "1"
+          },
+          "id_application": {
+            "type": "integer",
+            "example": "1"
+          },
+          "name": {
+            "type": "string",
+            "example": "Заявка на услугу Ипотека на пол века"
+          },
+          "opisanie": {
+            "type": "string",
+            "example": "Завявка ипотеки на 50 лет одобрена"
+          },
+          "Date": {
+            "type": "string",
+            "example": "22-07-2021"
+          }
+        }
+      },
+      "Applications": {
+        "type": "object",
+        "required": [
+          "name",
+          "opisanie"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": "1"
+          },
+          "id_user": {
+            "type": "integer",
+            "example": "1"
+          },
+          "id_notification": {
+            "type": "integer",
+            "example": "1"
+          },
+          "files": {
+            "type": "object"
+          },
+          "status": {
+            "type": "string",
+            "example": "На рассмотрении"
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "required": [
+          "code",
+          "message"
+        ],
+        "properties": {
+          "code": {
+            "type": "integer"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "Services": {
+        "type": "object",
+        "required": [
+          "name",
+          "opisanie"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": "1"
+          },
+          "name": {
+            "type": "string",
+            "example": "Ипотека"
+          },
+          "opisanie": {
+            "type": "string",
+            "example": "Ипотека на квартиру на 342 года"
+          },
+          "document": {
+            "type": "object"
+          }
+        }
+      },
+      "Auxiliary_table": {
+        "type": "object",
+        "required": [
+          "id_application_user",
+          "id_application"
+        ],
+        "properties": {
+          "id_application_user": {
+            "type": "integer",
+            "example": "1"
+          },
+          "id_application": {
+            "type": "integer",
+            "example": "1"
+          }
+        }
+      }
+    }
+  }
+}
