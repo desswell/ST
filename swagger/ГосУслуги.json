@@ -74,12 +74,22 @@
       }
     },
     "/user": {
-      "get": {
+      "post": {
         "summary": "Метод входа",
         "tags": [
           "user"
         ],
         "operationId": "GetUser",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Успешный ответ с пользователем",
@@ -511,7 +521,7 @@
     },
     "/put/application_status": {
       "put": {
-        "summary": "Метод обновления статуса информации о заявке",
+        "summary": "Метод обновления статуса заявки",
         "tags": [
           "Applications"
         ],
@@ -529,7 +539,7 @@
         },
         "responses": {
           "200": {
-            "description": "Успешный ответ с обновлением счета",
+            "description": "Успешный ответ с обновлением статуса заявки",
             "content": {
               "application/json": {
                 "schema": {
@@ -553,7 +563,7 @@
     },
     "/put/services_status": {
       "put": {
-        "summary": "Метод обновления статуса информации о заявке",
+        "summary": "Метод обновления статуса услуги",
         "tags": [
           "Services"
         ],
@@ -571,7 +581,7 @@
         },
         "responses": {
           "200": {
-            "description": "Успешный ответ с обновлением услуги",
+            "description": "Успешный ответ с обновлением статуса услуги",
             "content": {
               "application/json": {
                 "schema": {
@@ -599,7 +609,7 @@
         "tags": [
           "Applications"
         ],
-        "operationId": "GetApplicationByIdServices",
+        "operationId": "GetApplicationByIdUser",
         "parameters": [
           {
             "name": "id_user",
