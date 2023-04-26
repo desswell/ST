@@ -73,8 +73,8 @@
         }
       }
     },
-    "/user": {
-      "post": {
+    "/user/logIn": {
+      "get": {
         "summary": "Метод входа",
         "tags": [
           "user"
@@ -93,6 +93,37 @@
         "responses": {
           "200": {
             "description": "Успешный ответ с пользователем",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Все нестандартное",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/logOut": {
+      "delete": {
+        "summary": "Метод выхода",
+        "tags": [
+          "user"
+        ],
+        "operationId": "logOutUser",
+        "responses": {
+          "200": {
+            "description": "Успешный выход",
             "content": {
               "application/json": {
                 "schema": {
@@ -502,48 +533,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Services"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "Все нестандартное",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/put/application_status": {
-      "put": {
-        "summary": "Метод обновления статуса заявки",
-        "tags": [
-          "Applications"
-        ],
-        "operationId": "UbdateApplicationStatusFrom",
-        "requestBody": {
-          "description": "Обновление статуса заявки",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Applications"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Успешный ответ с обновлением статуса заявки",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Applications"
                 }
               }
             }
