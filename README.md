@@ -3,6 +3,8 @@
 
 Ссылка на репозиторий [frontend](https://github.com/desswell/frontend-st2023)
 
+Ссылка на репозиторий [backend](https://github.com/Mikolaaaa/back_ST_2023)
+
 Ссылка на [figma](https://www.figma.com/file/tGSwM3Kk8hAat1xHsxs8rP/%D0%97%D0%B0%D1%8F%D0%B2%D0%BA%D0%B8-%D0%B3%D0%BE%D1%81%D1%83%D1%81%D0%BB%D1%83%D0%B3%D0%B8?node-id=4%3A2070&t=g3tzC4dZI7nnQiq4-1)
 
 ER-диаграмма
